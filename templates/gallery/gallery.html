@@ -1,0 +1,74 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Aleksandra Tomaszewska">
+    <meta name="generator" content="Image website">
+    <title>Galeria zdjęć</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/blog/">
+
+    
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static '/bootstrap/assets/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <link href="{% static '/bootstrap/assets/css/style.css' %}" rel="stylesheet">
+  </head>
+  <body>
+
+
+  {% include "gallery/gallery_navbar.html" %}
+
+    <body class="container bg-dark">
+      {% comment %} <div class="row"> {% endcomment %}
+        {% for category in categories %}
+        {% comment %} <a class="p-2 link-secondary" href="{% url 'image-category' category.slug %}">{{category.title}}</a> {% endcomment %}
+        <div class="col-md-12 p-md-4 mb-2 rounded bg-light text-dark">
+          <div class="d-flex justify-content-between">
+            <div class="col-md-4 px-0 ">
+              <h1 class="display-4 fst-italic">{{category.title}}</h1>
+              <p class="lead my-3">{{category.description}}</p>
+              <p class="lead mb-0"><a href="{% url 'gallery-image-category' category.slug %}" class="text-white fw-bold">Continue reading...</a></p>
+            </div>
+            <div class="col-md-5 ">
+              <img class="img-fluid float-right" src="{{category.image.landImage.url}}" alt="{{category.image.altText}}">
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      {% comment %} </div> {% endcomment %}
+    </body>
+
+<footer class="blog-footer">
+  <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+  <p>
+    <a href="#">Back to top</a>
+  </p>
+</footer>
+
+
+    
+  </body>
+</html>
