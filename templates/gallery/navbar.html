@@ -1,0 +1,14 @@
+
+<div class="d-flex text-center py-1 mb-2 text-white bg-dark">
+    <div class="cover-container d-flex h-100 pb-1 mx-auto flex-column">
+        <header class="mb-auto">
+            <div>
+            <nav class="nav nav-masthead justify-content-center float-md-end">
+                {% for cat in categories %}
+                <a class="nav-link {% if cat == category %}active{% endif %} link-secondary" href="{% url 'gallery-image-category' cat.slug %}">{{cat.title}}</a>
+                {% endfor %}
+            </nav>
+            </div>
+        </header>
+    </div>
+</div>
