@@ -3,9 +3,10 @@
         <header class="mb-auto">
             <div>
             <nav class="nav nav-masthead justify-content-center float-md-end">
-                {% for cat in categories %}
+                <a class="nav-link link-secondary" href="{% url 'blog-article-add' %}">Napisz Wpis!</a>
+                {% comment %} {% for cat in categories %}
                 <a class="nav-link {% if cat == category %}active{% endif %} link-secondary" href="{% url 'gallery-image-category' cat.slug %}">{{cat.title}}</a>
-                {% endfor %}
+                {% endfor %} {% endcomment %}
             </nav>
             </div>
         </header>

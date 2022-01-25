@@ -5,9 +5,9 @@ from django.shortcuts import render
 #and bring them back to list it in page
 #detailed- the same but one record.
 #Generic handles queries etc for us.
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from .models import *
-
+from .forms import PostForm
 # Create your views here.
 
 # view as a function
@@ -36,3 +36,24 @@ class HomeView(ListView):
 class ArticleView(DetailView):
     model = Post
     template_name = 'blog/article.html'
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        ModifyContextBlogBase(context)
+        return context
+
+class AddArticleView(CreateView):
+    model = Post
+    form_class = PostForm #use our defined class form
+    template_name = 'blog/add_article.html'
+    # fields = '__all__'
+    # fields = ('title', 'body')
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        ModifyContextBlogBase(context)
+        return context

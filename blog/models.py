@@ -39,7 +39,11 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
-    thumbnail = ResizedImageField(size=[200, 250], crop=['middle', 'center'], default='blog/default_blog_thumbnail.jpg', upload_to='blog')
+    thumbnail = ResizedImageField(size=[200, 250], crop=['middle', 'center'], default='blog/default_blog_thumbnail.jpg', upload_to='blog/')
     # used in Admin page
     def __str__(self):
         return self.title + ' | ' + str(self.author)
+
+    def get_absolute_url(self):
+        return reverse("blog-article", kwargs={"pk": self.pk})
+    
