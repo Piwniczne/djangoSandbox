@@ -14,8 +14,9 @@ Used Python version is 3.8.8 and this version is used in the venv.
 
 ## Usage
 
-cd DjangoProject
-python manage.py runserver
+1. cd DjangoProject
+2. python manage.py runserver
+3. Open browser http://127.0.0.1:8000/
 
 ## Notes
 This project is still under development and is meant not to be stable :)
