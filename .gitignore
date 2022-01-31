@@ -10,7 +10,9 @@ media
 passenger_wsgi.py
 stderr.log
 tmp/restart.txt
+tmp/*
 .htaccess
+index.html
 
 # Backup files # 
 *.bak 
