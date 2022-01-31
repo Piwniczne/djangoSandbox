@@ -6,6 +6,12 @@ __pycache__
 db.sqlite3
 media
 
+#hosting
+passenger_wsgi.py
+stderr.log
+tmp/restart.txt
+.htaccess
+
 # Backup files # 
 *.bak 
 
