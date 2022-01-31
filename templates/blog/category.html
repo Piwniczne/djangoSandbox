@@ -5,28 +5,26 @@
 {% include "blog/navbar.html" %}
 {% endblock %}
 
-
 {% block bodyBlock %}
     
 <main class="container">
 
   <div class="row g-5">
-    <div class="col-md-8 border p-4 mb-3 rounded">
-      <div class="form-group">
-        <form method="POST">
-          {% csrf_token %}
-          {{ form.as_p}}
-          {% comment %} {{ form.as_ul}} {% endcomment %}
-          {% comment %} <table> {% endcomment %}
-          {% comment %} {{ form.as_table}} {% endcomment %}
-          {% comment %} </table> {% endcomment %} 
-          <button class="btn btn-outline-secondary">Dodaj artykuł</button>
-        </form>
-      </div>
-      <script>
-        var usr_id = "{{user.id}}"
-        document.getElementById("user_id").value = usr_id;
-      </script>
+    <div class="col-md-8">
+
+      <article class="blog-post">
+        <h2 class="blog-post-title">{{category.title}}</h2>
+        <p class="blog-post-meta">January 1, 2021 by <a href="#" class= "link-secondary" >{{post.author}}</a></p>
+        {% comment %} safe to use HTML {% endcomment %}
+        {{category.description|safe}}
+      </article>
+
+      
+
+      <nav class="blog-pagination" aria-label="Pagination">
+        <a class="btn btn-outline-secondary" href="#">Older</a>
+        <a class="btn btn-outline-secondary disabled">Newer</a>
+      </nav>
     </div>
 
     <div class="col-md-4">

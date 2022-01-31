@@ -1,0 +1,23 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block navbarBlock%}
+{% include "users/navbar.html" %}
+{% endblock %}
+
+{% block bodyBlock %}
+    
+<div class="text-center cover-container mx-auto p-3 flex-column">
+  <main class="px-3 p-md-4 bg-dark text-white shadow-sm rounded border">
+    {% if user.is_authenticated %}
+        Zalogowano jako: {{user.username}}.
+    {% else %}
+        Nie jesteś zalogowany.
+    {% endif %}
+  </main>
+</div>
+    
+{% endblock %}
+
+{% block footerBlock %}
+{% endblock %}

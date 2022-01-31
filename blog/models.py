@@ -1,4 +1,5 @@
 from django.utils import timezone
+from datetime import datetime, date
 from uuid import uuid4
 from django.db import models
 from django.contrib.auth.models import User
@@ -21,7 +22,7 @@ class Category(models.Model):
         return '{} {}'.format(self.title, self.uniqueId)
 
     def get_absolute_url(self):
-        return reverse("category-detail", kwargs={"slug": self.slug})
+        return reverse("blog-category-detail", kwargs={"pk": self.pk})
         
     def save(self, *args, **kwargs):
         if self.dataCreated is None:
@@ -39,7 +40,8 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
-    thumbnail = ResizedImageField(size=[200, 250], crop=['middle', 'center'], default='blog/default_blog_thumbnail.jpg', upload_to='blog/')
+    thumbnail = ResizedImageField(size=[400, 500], crop=['middle', 'center'], default='blog/default_blog_thumbnail.jpg', upload_to='blog/')
+    created = models.DateTimeField(auto_now_add=True)
     # used in Admin page
     def __str__(self):
         return self.title + ' | ' + str(self.author)

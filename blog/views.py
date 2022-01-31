@@ -5,9 +5,10 @@ from django.shortcuts import render
 #and bring them back to list it in page
 #detailed- the same but one record.
 #Generic handles queries etc for us.
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import *
-from .forms import PostForm
+from .forms import PostForm, EditForm, CategoryForm
+from django.urls import reverse_lazy
 # Create your views here.
 
 # view as a function
@@ -25,9 +26,11 @@ def ModifyContextBlogBase(context):
 class HomeView(ListView):
     model = Post #use this model. accesed by object_list in template
     template_name = 'blog/home.html'
+    ordering = ['-created']
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
+        # or super(ListView, self).get_context_data(**kwargs) ?
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         ModifyContextBlogBase(context)
@@ -43,6 +46,7 @@ class ArticleView(DetailView):
         # Add in a QuerySet of all the books
         ModifyContextBlogBase(context)
         return context
+  
 
 class AddArticleView(CreateView):
     model = Post
@@ -53,6 +57,55 @@ class AddArticleView(CreateView):
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        ModifyContextBlogBase(context)
+        return context
+
+class UpdatePostView(UpdateView):
+    model = Post
+    form_class = EditForm # use the same form as for creation
+    template_name = 'blog/update_article.html'
+    # fields = ['title', 'body', 'category']
+
+class DeletePostView(DeleteView):
+    model = Post
+    template_name = 'blog/delete_article.html'
+    success_url = reverse_lazy('blog-home')
+
+
+class AddCategoryView(CreateView):
+    model = Category
+    form_class = CategoryForm #use our defined class form
+    template_name = 'blog/add_category.html'
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        ModifyContextBlogBase(context)
+        return context
+
+
+class CategoryView(DetailView):
+    model = Category
+    template_name = 'blog/category.html'
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        ModifyContextBlogBase(context)
+        return context  
+
+class CategoryListView(ListView):
+    model = Category #use this model. accesed by object_list in template
+    template_name = 'blog/category_list.html'
+    ordering = ['-pk']
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        # or super(ListView, self).get_context_data(**kwargs) ?
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         ModifyContextBlogBase(context)

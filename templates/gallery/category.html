@@ -27,7 +27,7 @@
 
                 <img src="{{image.landImage.url}}" alt="{{image.altText}}">
                 <div class="card-body">
-                <p class="card-text">{{image.shortDescription}} ... <a href="{% url 'gallery-image-detail' slugCategory=category.slug slugImage=image.slug %}">read more</a></p>
+                <p class="card-text">{{image.shortDescription}}</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                     <a href="{% url 'gallery-image-detail' slugCategory=category.slug slugImage=image.slug %}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>

@@ -25,6 +25,9 @@ urlpatterns = [
     path('', include('pages.urls')),
     path('gallery/', include('gallery.urls')),
     path('blog/', include('blog.urls')),
+    #django will hangle most of auth for us- create user etc.
+    path('users/', include('django.contrib.auth.urls')),
+    path('users/', include('users.urls')),
 ]
 
 

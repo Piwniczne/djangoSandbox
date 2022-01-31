@@ -10,11 +10,17 @@
   
   <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-500 position-relative">
     <div class="col d-flex flex-column p-4 text-white">
+      <strong class="d-inline-block mb-2 text-secondary">{{object_list.0.category.title}}</strong>
       <h1 class="display-4 fst-italic">{{object_list.0.title}}</h1>
-      <p class="lead my-3">{{object_list.0.body}}</p>
+      <div class="small text-muted">{{object_list.0.created}}</div>
+      <p class="lead my-2">{{object_list.0.body}}</p>
       {% comment %} <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p> {% endcomment %}
-      <a href="{% url 'blog-article' object_list.0.pk %}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
-    </div>
+      <a href="{% url 'blog-article' object_list.0.pk %}" role="button" class="btn mt-2 btn-block btn-outline-secondary">View</a>
+      {% if user.is_authenticated and user.id == object_list.0.author.id %}
+      <a href="{% url 'blog-article-edit' object_list.0.pk %}" role="button" class="btn mt-2 btn-block btn-outline-secondary">Edit</a>
+      <a href="{% url 'blog-article-delete' object_list.0.pk %}" role="button" class="btn mt-2 btn-block btn-outline-secondary">Delete</a>
+      {% endif %}
+ </div>
     <div class="col-auto d-none d-lg-block">
       <img class="bd-placeholder-img" width="400" height="500" src="{{object_list.0.thumbnail.url}}" alt="{{post.title}}">
     </div>
@@ -23,17 +29,20 @@
   <div class="row mb-2">
     {% for post in object_list|slice:"1:" %}
     <div class="col-md-6">
-        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-300 position-relative">
             <div class="col p-4 d-flex flex-column position-static text-white">
                 <strong class="d-inline-block mb-2 text-secondary">{{post.category.title}}</strong>
                 <h3 class="mb-0">{{post.title}}</h3>
-                <div class="mb-1 text-muted">Nov 12</div>
-                <p class="card-text mb-auto">{{post.body|truncatechars:100 }}</p>
-                {% comment %}  class="stretched-link">Continue reading</a> {% endcomment %}
-                <a href="{% url 'blog-article' post.pk %}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
+                <div class="mb-1 small text-muted">{{post.created}}</div>
+                <p class="card-text small mb-auto">{{post.body|truncatechars:100 }}</p>
+                <a href="{% url 'blog-article' post.pk %}" role="button" class="btn btn-sm btn-outline-secondary mt-1">View</a>
+                {% if user.is_authenticated and user.id == post.author.id %}
+                <a href="{% url 'blog-article-edit' post.pk %}" role="button" class="btn btn-sm btn-outline-secondary mt-1">Edit</a>
+                <a href="{% url 'blog-article-delete' post.pk %}" role="button" class="btn btn-sm btn-outline-secondary mt-1">Delete</a>
+                {% endif %}
             </div>
             <div class="col-auto d-none d-lg-block">
-              <img class="bd-placeholder-img" width="200" height="250" src="{{post.thumbnail.url}}" alt="{{post.title}}">
+              <img class="bd-placeholder-img" width="200" height="300" src="{{post.thumbnail.url}}" alt="{{post.title}}">
             </div>
         </div>
     </div>

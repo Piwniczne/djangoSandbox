@@ -5,28 +5,19 @@
 {% include "blog/navbar.html" %}
 {% endblock %}
 
-
 {% block bodyBlock %}
     
 <main class="container">
 
   <div class="row g-5">
     <div class="col-md-8 border p-4 mb-3 rounded">
+        <h3> Usuń wpis: {{post.title}} </h3>
       <div class="form-group">
         <form method="POST">
           {% csrf_token %}
-          {{ form.as_p}}
-          {% comment %} {{ form.as_ul}} {% endcomment %}
-          {% comment %} <table> {% endcomment %}
-          {% comment %} {{ form.as_table}} {% endcomment %}
-          {% comment %} </table> {% endcomment %} 
-          <button class="btn btn-outline-secondary">Dodaj artykuł</button>
+          <button class="btn btn-outline-secondary">Usuń!</button>
         </form>
       </div>
-      <script>
-        var usr_id = "{{user.id}}"
-        document.getElementById("user_id").value = usr_id;
-      </script>
     </div>
 
     <div class="col-md-4">

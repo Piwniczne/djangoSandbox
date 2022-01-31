@@ -5,10 +5,11 @@
 {% include "blog/navbar.html" %}
 {% endblock %}
 
-
 {% block bodyBlock %}
     
 <main class="container">
+
+  {% if user.is_authenticated and user.id == post.author.id %}
 
   <div class="row g-5">
     <div class="col-md-8 border p-4 mb-3 rounded">
@@ -16,17 +17,9 @@
         <form method="POST">
           {% csrf_token %}
           {{ form.as_p}}
-          {% comment %} {{ form.as_ul}} {% endcomment %}
-          {% comment %} <table> {% endcomment %}
-          {% comment %} {{ form.as_table}} {% endcomment %}
-          {% comment %} </table> {% endcomment %} 
-          <button class="btn btn-outline-secondary">Dodaj artykuł</button>
+          <button class="btn btn-outline-secondary">Zapisz</button>
         </form>
       </div>
-      <script>
-        var usr_id = "{{user.id}}"
-        document.getElementById("user_id").value = usr_id;
-      </script>
     </div>
 
     <div class="col-md-4">
@@ -56,6 +49,10 @@
       </div>
     </div>
   </div>
+
+  {% else %}
+  Not allowed to edit :)
+  {% endif %}
 
 </main>
     

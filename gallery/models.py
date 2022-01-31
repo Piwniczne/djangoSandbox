@@ -27,7 +27,7 @@ class Category(models.Model):
         return '{} {}'.format(self.title, self.uniqueId)
 
     def get_absolute_url(self):
-        return reverse("category-detail", kwargs={"slug": self.slug})
+        return reverse("gallery-image-category", kwargs={"slug": self.slug})
         
     def save(self, *args, **kwargs):
         if self.dataCreated is None:

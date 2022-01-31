@@ -1,0 +1,29 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block navbarBlock%}
+{% include "users/navbar.html" %}
+{% endblock %}
+
+{% block bodyBlock %}
+    
+<div class="cover-container mx-auto p-3 flex-column">
+  <main class="px-3 p-md-4 bg-dark text-white shadow-sm rounded border">
+    <div class="form-group">
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p}}
+        {% comment %} {{ form.as_ul}} {% endcomment %}
+        {% comment %} <table> {% endcomment %}
+        {% comment %} {{ form.as_table}} {% endcomment %}
+        {% comment %} </table> {% endcomment %} 
+        <button class="btn btn-outline-secondary">Zarejestruj</button>
+      </form>
+    </div>
+  </main>
+</div>
+    
+{% endblock %}
+
+{% block footerBlock %}
+{% endblock %}

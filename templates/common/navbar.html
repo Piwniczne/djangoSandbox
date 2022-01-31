@@ -8,6 +8,7 @@
           <a class="nav-link {% if nbar == 'home' %}active{% endif %}" aria-current="page" href="{% url 'home' %}">Home</a>
           <a class="nav-link {% if nbar == 'gallery' %}active{% endif %}" href="{% url 'gallery-home' %}">Galeria zdjęć</a>
           <a class="nav-link {% if nbar == 'blog' %}active{% endif %}" href="{% url 'blog-home' %}">Blog</a>
+          <a class="nav-link {% if nbar == 'users' %}active{% endif %}" href="{% url 'users-home' %}">Konto</a>
           <a class="nav-link {% if nbar == 'location' %}active{% endif %}" href="#">Lokalizacja</a>
         </nav>
       </div>

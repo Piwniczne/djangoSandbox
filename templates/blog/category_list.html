@@ -1,0 +1,29 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+
+{% block navbarBlock%}
+{% include "blog/navbar.html" %}
+{% endblock %}
+
+{% block bodyBlock %}
+  
+  <div class="row mb-2">
+    {% for cat in object_list %}
+    <div class="col-md-6">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-300 position-relative">
+            <div class="col p-4 d-flex flex-column position-static text-white">
+                <h3 class="mb-0">{{cat.title}}</h3>
+                <p class="card-text small mb-auto">{{cat.description|truncatechars:100 }}</p>
+                <a href="{% url 'blog-category' cat.pk %}" role="button" class="btn btn-sm btn-outline-secondary mt-1">View</a>
+                {% if user.is_authenticated %}
+                {% comment %} <a href="{% url 'blog-article-edit' cat.pk %}" role="button" class="btn btn-sm btn-outline-secondary mt-1">Edit</a> {% endcomment %}
+                {% comment %} <a href="{% url 'blog-article-delete' cat.pk %}" role="button" class="btn btn-sm btn-outline-secondary mt-1">Delete</a> {% endcomment %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}
