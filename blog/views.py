@@ -9,6 +9,8 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import *
 from .forms import PostForm, EditForm, CategoryForm
 from django.urls import reverse_lazy
+from rest_framework import viewsets
+from .serializer import PostSerializer
 # Create your views here.
 
 # view as a function
@@ -110,3 +112,7 @@ class CategoryListView(ListView):
         # Add in a QuerySet of all the books
         ModifyContextBlogBase(context)
         return context
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer

@@ -1,6 +1,10 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
-from .views import AddArticleView, AddCategoryView, CategoryListView, HomeView, ArticleView, UpdatePostView, DeletePostView, CategoryView
+from .views import AddArticleView, AddCategoryView, CategoryListView, HomeView, ArticleView, UpdatePostView, DeletePostView, CategoryView, PostViewSet
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'articles', PostViewSet)
 
 urlpatterns = [
     # path('', views.home, name='blog-home')
@@ -12,4 +16,5 @@ urlpatterns = [
     path('category', CategoryListView.as_view(), name='blog-category-list'),
     path('category/add', AddCategoryView.as_view(), name='blog-category-add'),
     path('category/<int:pk>', CategoryView.as_view(), name='blog-category'),
+    path('api/', include(router.urls))
 ]
